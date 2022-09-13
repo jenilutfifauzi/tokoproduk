@@ -1,19 +1,13 @@
-      @includeIf('layouts.header')
-      @includeIf('layouts.sidebar')
+@extends('layouts.master')
 
-      <!-- Main Content -->
-      <div class="main-content">
-        <section class="section">
-          <div class="section-header">
-            <h1>Dashboard</h1>
-          </div>
+@section('title')
+    Dashboard | Toko Produk
+@endsection
 
-          <div class="section-body">
-          </div>
-        </section>
-      </div>
+@section('title-header')
+    Dashboard
+@endsection
 
-      @includeIf('layouts.footer')
-
-</body>
-</html>
+@section('content')
+    <h1>ini dashboard</h1>
+@endsection

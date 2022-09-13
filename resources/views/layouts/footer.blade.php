@@ -1,6 +1,7 @@
 <footer class="main-footer">
     <div class="footer-left">
-        Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad Nauval Azhar</a>
+        Copyright &copy; 2022 <div class="bullet"></div> Modif By <a href="https://facebook.com/jenitmvn/">Jeni Lutfi
+            fauzi</a>
     </div>
     <div class="footer-right">
         2.3.0
@@ -22,10 +23,26 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="../assets/js/stisla.js"></script>
 
-<!-- JS Libraies -->
+
 
 <!-- Template JS File -->
 <script src="../assets/js/scripts.js"></script>
 <script src="../assets/js/custom.js"></script>
 
 <!-- Page Specific JS File -->
+<script src="../assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="../assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="../assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="../assets/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="../assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="../assets/plugins/jszip/jszip.min.js"></script>
+<script src="../assets/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="../assets/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="../assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="../assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="../assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+{{-- validator --}}
+<script src="../assets/js/validator.min.js"></script>
+
