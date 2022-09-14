@@ -9,7 +9,7 @@
     Product
 @endsection
 
-@includeIf('variants.form')
+@includeIf('product.form')
 @section('content')
     <div class="row">
         <div class="col-12 col-md-6 col-lg-12">
@@ -20,12 +20,16 @@
 
                 <div class="card-body">
                     <button class="btn btn-primary mb-4 btn-small"
-                        onclick="addForm('{{ route('variants.store') }}')">Tambah</button>
-                    <table class="table" id="table1">
+                        onclick="addForm('{{ route('product.store') }}')">Tambah</button>
+                    <table class="table table-striped table-bordered display nowrap" id="table1">
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
+                                <th scope="col">Kode</th>
                                 <th scope="col">Product</th>
+                                <th scope="col">Categories</th>
+                                <th scope="col">Variants</th>
+                                <th scope="col">Harga</th>
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
@@ -47,21 +51,16 @@
                     processing: true,
                     autoWidth: false,
                     ajax: {
-                        url: '{{ route('variants.data') }}',
+                        url: '{{ route('product.data') }}',
                     },
-                    columns: [{
-                            data: 'DT_RowIndex',
-                            searchable: false,
-                            sortable: false
-                        },
-                        {
-                            data: 'nama_variants'
-                        },
-                        {
-                            data: 'aksi',
-                            searchable: false,
-                            sortable: false
-                        },
+                    columns: [
+                        {data: 'DT_RowIndex', searchable: false,sortable: false},
+                        {data: 'kode_product'},
+                        {data: 'nama_product'},
+                        {data: 'nama_categories'},
+                        {data: 'nama_variants'},
+                        {data: 'harga_product'},
+                        {data: 'aksi',searchable: false,sortable: false},
                     ]
                 })
 
@@ -95,7 +94,6 @@
                 $('#modal-form form')[0].reset();
                 $('#modal-form form').attr('action', url);
                 $('#modal-form [name=_method]').val('post');
-                $('#modal-form [name=nama_variants]').focus();
             }
 
             function editForm(url) {
@@ -105,12 +103,14 @@
                 $('#modal-form form')[0].reset();
                 $('#modal-form form').attr('action', url);
                 $('#modal-form [name=_method]').val('put');
-                $('#modal-form [name=nama_variants]').focus();
 
                 //get data
                 $.get(url)
                     .done((response) => {
-                        $('#modal-form [name=nama_variants]').val(response.nama_variants)
+                        $('#modal-form [name=nama_product]').val(response.nama_product)
+                        $('#modal-form [name=id_categories]').val(response.id_categories)
+                        $('#modal-form [name=id_variants]').val(response.id_variants)
+                        $('#modal-form [name=harga_product]').val(response.harga_product)
                     })
                     .fail((errors) => {
                         alert('Tidak dapat menampilkan data');

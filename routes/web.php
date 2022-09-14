@@ -28,6 +28,7 @@ Route::resource('/categories', CategoriesController::class);
 Route::get('/variants/data', [VariantsController::class, 'data'])->name('variants.data');
 Route::resource('/variants', VariantsController::class);
 
+
 //Product
 Route::get('/product/data', [ProductController::class, 'data'])->name('product.data');
 Route::resource('/product', ProductController::class);
