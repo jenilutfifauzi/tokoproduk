@@ -1,15 +1,15 @@
 @extends('layouts.master')
 
 @section('title')
-    Product | Toko Produk
+    Product Images | Toko Produk
 @endsection
 
 
 @section('title-header')
-    Product
+    Product Images
 @endsection
 
-@includeIf('product.form')
+@includeIf('product_images.form')
 @section('content')
     <div class="row">
         <div class="col-12 col-md-6 col-lg-12">
@@ -20,16 +20,13 @@
 
                 <div class="card-body">
                     <button class="btn btn-primary mb-4 btn-small"
-                        onclick="addForm('{{ route('product.store') }}')">Tambah</button>
+                        onclick="addForm('{{ route('product_images.store') }}')">Tambah</button>
                     <table class="table table-striped table-bordered display nowrap" id="table1">
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
-                                <th scope="col">Kode</th>
                                 <th scope="col">Product</th>
-                                <th scope="col">Categories</th>
-                                <th scope="col">Variants</th>
-                                <th scope="col">Harga</th>
+                                <th scope="col">Images</th>
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
@@ -51,33 +48,13 @@
                     processing: true,
                     autoWidth: false,
                     ajax: {
-                        url: '{{ route('product.data') }}',
+                        url: '{{ route('product_images.data') }}',
                     },
-                    columns: [{
-                            data: 'DT_RowIndex',
-                            searchable: false,
-                            sortable: false
-                        },
-                        {
-                            data: 'kode_product'
-                        },
-                        {
-                            data: 'nama_product'
-                        },
-                        {
-                            data: 'nama_categories'
-                        },
-                        {
-                            data: 'nama_variants'
-                        },
-                        {
-                            data: 'harga_product'
-                        },
-                        {
-                            data: 'aksi',
-                            searchable: false,
-                            sortable: false
-                        },
+                    columns: [
+                        {data: 'DT_RowIndex', searchable: false,sortable: false},
+                        {data: 'nama_product'},
+                        {data: 'images',searchable: false,sortable: false},
+                        {data: 'aksi',searchable: false,sortable: false},
                     ]
                 })
 
@@ -86,14 +63,16 @@
                         $.ajax({
                                 url: $('#modal-form form').attr('action'),
                                 type: 'post',
-                                enctype: 'multipart/form-data',
-                                data: $('#modal-form form').serialize()
+                                data: new FormData($('.form-horizontal')[0]),
+                                async: false,
+                                processData: false,
+                                contentType: false
                             })
                             .done((response) => {
                                 $('#modal-form').hide();
+                                
                                 table.ajax.reload();
                                 location.reload(true);
-                                console.log(response);
 
                             })
                             .fail((errors) => {
@@ -106,7 +85,7 @@
 
             function addForm(url) {
                 $('#modal-form').modal('show');
-                $('#modal-form .modal-title').text('Tambah Product');
+                $('#modal-form .modal-title').text('Tambah Images');
 
                 $('#modal-form form')[0].reset();
                 $('#modal-form form').attr('action', url);
@@ -124,10 +103,9 @@
                 //get data
                 $.get(url)
                     .done((response) => {
-                        $('#modal-form [name=nama_product]').val(response.nama_product)
-                        $('#modal-form [name=id_categories]').val(response.id_categories)
-                        $('#modal-form [name=id_variants]').val(response.id_variants)
-                        $('#modal-form [name=harga_product]').val(response.harga_product)
+                        $('#modal-form [name=id_product]').val(response.id_product)
+                        $('#modal-form [name=foto]').val(response.nama_imgs)
+                     
                     })
                     .fail((errors) => {
                         alert('Tidak dapat menampilkan data');
@@ -135,18 +113,18 @@
                     })
             }
 
-            function deleteForm(url) {
-                $.post(url, {
-                        '_token': $('[name=csrf-token]').attr('content'),
-                        '_method': 'delete'
-                    })
-                    .done((response) => {
-                        table.ajax.reload();
-                    })
-                    .fail((errors) => {
-                        alert('Tidak dapat menghapus data');
-                        return;
-                    })
+            function deleteForm(url){
+              $.post(url, {
+                '_token': $('[name=csrf-token]').attr('content'),
+                '_method': 'delete'
+              })
+              .done((response) => {
+                 table.ajax.reload();
+              })
+              .fail((errors) => {
+                alert('Tidak dapat menghapus data');
+                return;
+              })
             }
         </script>
     @endpush

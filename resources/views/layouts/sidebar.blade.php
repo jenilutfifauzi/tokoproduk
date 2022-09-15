@@ -16,11 +16,11 @@
           
           <li><a class="nav-link" href="{{ route('product.index') }}"><i class="fas fa-cubes"></i> <span>Product</span></a></li>
           
-          <li><a class="nav-link" href="{{ route('variants.index') }}"><i class="fa fa-address-card"></i> <span>Product Images</span></a></li>
+          <li><a class="nav-link" href="{{ route('product_images.index') }}"><i class="fa fa-address-card"></i> <span>Product Images</span></a></li>
 
 
   
-          <li><a class="nav-link" href="credits.html"><i class="fas fa-pencil-ruler"></i> <span>Api</span></a></li>
+         
         </ul>
 
     </aside>

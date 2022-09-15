@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductImagesController;
 use App\Http\Controllers\VariantsController;
+use App\Models\ProductImages;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,8 +30,11 @@ Route::resource('/categories', CategoriesController::class);
 Route::get('/variants/data', [VariantsController::class, 'data'])->name('variants.data');
 Route::resource('/variants', VariantsController::class);
 
-
 //Product
 Route::get('/product/data', [ProductController::class, 'data'])->name('product.data');
 Route::resource('/product', ProductController::class);
+
+//Product images
+Route::get('/product_images/data', [ProductImagesController::class, 'data'])->name('product_images.data');
+Route::resource('/product_images', ProductImagesController::class);
 

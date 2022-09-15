@@ -1,7 +1,7 @@
 <!-- Modal -->
 <div class="modal fade" id="modal-form" tabindex="-2" aria-labelledby="modal-form" aria-hidden="true">
     <div class="modal-dialog">
-        <form action="" method="POST" class="form-horizontal">
+        <form action="" method="POST" class="form-horizontal" enctype="multipart/form-data">
             @csrf
             @method('post')
 
@@ -54,7 +54,7 @@
 
                             </select>
 
-                            <input type="hidden" name="id_imgs" id="id_imgs" class="form-control" value="0" required>
+                            <input type="hidden" name="foto" id="foto" class="form-control" value="0" required>
                             <span class="help-block with-error">
 
                             </span>

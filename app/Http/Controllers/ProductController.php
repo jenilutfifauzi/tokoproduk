@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categories;
 use App\Models\Product;
+use App\Models\ProductImages;
 use App\Models\Variants;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -63,9 +64,7 @@ class ProductController extends Controller
     {
         $product = Product::latest()->first() ?? new Product();
         $request['kode_product'] = 'P-'. tambah_nol_didepan((int)$product->id_product+1, 6);
-
         $product = Product::create($request->all());
-
         return response()->json('data berhasil disimpan', 200);
 
     }

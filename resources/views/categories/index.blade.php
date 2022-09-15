@@ -20,7 +20,7 @@
 
                 <div class="card-body">
                     <button class="btn btn-primary mb-4 btn-small"
-                        onclick="addForm('{{ route('variants.store') }}')">Tambah</button>
+                        onclick="addForm('{{ route('categories.store') }}')">Tambah</button>
                     <table class="table" id="table1">
                         <thead>
                             <tr>

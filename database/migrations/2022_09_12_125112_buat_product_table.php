@@ -17,7 +17,7 @@ class BuatProductTable extends Migration
             $table->increments('id_product');
             $table->integer('id_categories');
             $table->integer('id_variants');
-            $table->integer('id_imgs');
+            $table->integer('foto');
             $table->string('nama_product');
             $table->integer('harga_product');
             $table->timestamps();
