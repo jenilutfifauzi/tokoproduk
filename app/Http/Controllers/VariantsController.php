@@ -35,6 +35,10 @@ class VariantsController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'nama_variants' => 'required|unique:variants'
+        ]);
+
         $variants = new Variants();
         $variants->nama_variants = $request->nama_variants;
         $variants->save();
@@ -53,6 +57,10 @@ class VariantsController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'nama_variants' => 'required|unique:variants'
+        ]);
+
         $variants =  Variants::find($id);
         $variants->nama_variants = $request->nama_variants;
         $variants->update();

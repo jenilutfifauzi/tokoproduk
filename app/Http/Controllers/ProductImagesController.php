@@ -62,6 +62,9 @@ class ProductImagesController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'id_product' => 'required|unique:product_images'
+        ]);
 
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
@@ -118,6 +121,9 @@ class ProductImagesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'id_product' => 'required|unique:product_images'
+        ]);
 
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
@@ -127,6 +133,7 @@ class ProductImagesController extends Controller
 
 
         $product =  ProductImages::find($id);
+        $product->id_product = $request->id_product;
         $product->nama_imgs = $fileName;
         $product->update();
 

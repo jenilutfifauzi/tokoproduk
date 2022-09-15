@@ -53,6 +53,10 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nama_categories' => 'required|unique:product_categories'
+        ]);
+
         $categories = new Categories();
         $categories->nama_categories = $request->nama_categories;
         $categories->save();
@@ -94,6 +98,11 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $request->validate([
+            'nama_categories' => 'required|unique:product_categories'
+        ]);
+
         $categories =  Categories::find($id);
         $categories->nama_categories = $request->nama_categories;
         $categories->update();

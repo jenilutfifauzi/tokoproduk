@@ -62,6 +62,9 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nama_product' => 'required|unique:product'
+        ]);
         $product = Product::latest()->first() ?? new Product();
         $request['kode_product'] = 'P-'. tambah_nol_didepan((int)$product->id_product+1, 6);
         $product = Product::create($request->all());
@@ -102,6 +105,9 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'nama_product' => 'required|unique:product'
+        ]);
         $product =  Product::find($id);
         $product->nama_product = $request->nama_product;
         $product->update();
