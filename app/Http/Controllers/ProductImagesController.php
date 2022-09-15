@@ -131,7 +131,6 @@ class ProductImagesController extends Controller
             $file->move(public_path('/images'), $fileName);
         }
 
-
         $product =  ProductImages::find($id);
         $product->id_product = $request->id_product;
         $product->nama_imgs = $fileName;

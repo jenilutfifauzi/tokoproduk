@@ -25,18 +25,18 @@ class CategoriesController extends Controller
         $categories = ModelsCategories::orderby('id_categories', 'asc')->get();
 
         return datatables()
-                ->of($categories)
-                ->addIndexColumn()
-                ->addColumn('aksi', function($categories){
-                    return 
+            ->of($categories)
+            ->addIndexColumn()
+            ->addColumn('aksi', function ($categories) {
+                return
                     '<div class="btn-group">
-                        <button onclick="editForm(`'. route('categories.update', $categories->id_categories).'`)" class="btn btn-primary"><i class="fas fa-edit"></i>Edit</button>
+                        <button onclick="editForm(`' . route('categories.update', $categories->id_categories) . '`)" class="btn btn-primary"><i class="fas fa-edit"></i>Edit</button>
 
-                        <button onclick="deleteForm(`'. route('categories.destroy',  $categories->id_categories).'`)"class="btn btn-danger"><i class="fas fa-trash"></i>Hapus</button>
+                        <button onclick="deleteForm(`' . route('categories.destroy',  $categories->id_categories) . '`)"class="btn btn-danger"><i class="fas fa-trash"></i>Hapus</button>
                     </div>';
-                })
-                ->rawColumns(['aksi'])
-                ->make(true);
+            })
+            ->rawColumns(['aksi'])
+            ->make(true);
     }
 
     public function create()
@@ -62,7 +62,6 @@ class CategoriesController extends Controller
         $categories->save();
 
         return response()->json('data berhasil disimpan', 200);
-
     }
 
     /**
@@ -75,7 +74,7 @@ class CategoriesController extends Controller
     {
         $categories = categories::find($id);
 
-        return response()->json($categories,200);
+        return response()->json($categories, 200);
     }
 
     /**
@@ -108,7 +107,6 @@ class CategoriesController extends Controller
         $categories->update();
 
         return response()->json('data berhasil disimpan', 200);
-
     }
 
     /**

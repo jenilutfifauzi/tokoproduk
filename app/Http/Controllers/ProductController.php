@@ -11,41 +11,41 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
-       /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-      
+
         $categories = Categories::all()->pluck('nama_categories', 'id_categories');
         $variants = Variants::all()->pluck('nama_variants', 'id_variants');
 
-        return view('product.index', compact('categories','variants'));
+        return view('product.index', compact('categories', 'variants'));
     }
 
     public function data()
     {
         $product = DB::table('product')
-                        ->leftjoin('product_categories', 'product_categories.id_categories', '=', 'product.id_categories')
-                        ->leftjoin('variants', 'variants.id_variants', '=', 'product.id_variants')
-                        ->orderBy('id_product','desc')
-                        ->get();
+            ->leftjoin('product_categories', 'product_categories.id_categories', '=', 'product.id_categories')
+            ->leftjoin('variants', 'variants.id_variants', '=', 'product.id_variants')
+            ->orderBy('id_product', 'desc')
+            ->get();
 
         return datatables()
-                ->of($product)
-                ->addIndexColumn()
-                ->addColumn('aksi', function($product){
-                    return 
+            ->of($product)
+            ->addIndexColumn()
+            ->addColumn('aksi', function ($product) {
+                return
                     '<div class="btn-group">
-                        <button onclick="editForm(`'. route('product.update', $product->id_product).'`)" class="btn btn-primary"><i class="fas fa-edit"></i>Edit</button>
+                        <button onclick="editForm(`' . route('product.update', $product->id_product) . '`)" class="btn btn-primary"><i class="fas fa-edit"></i>Edit</button>
 
-                        <button onclick="deleteForm(`'. route('product.destroy',  $product->id_product).'`)"class="btn btn-danger"><i class="fas fa-trash"></i>Hapus</button>
+                        <button onclick="deleteForm(`' . route('product.destroy',  $product->id_product) . '`)"class="btn btn-danger"><i class="fas fa-trash"></i>Hapus</button>
                     </div>';
-                })
-                ->rawColumns(['aksi'])
-                ->make(true);
+            })
+            ->rawColumns(['aksi'])
+            ->make(true);
     }
 
     public function create()
@@ -66,10 +66,9 @@ class ProductController extends Controller
             'nama_product' => 'required|unique:product'
         ]);
         $product = Product::latest()->first() ?? new Product();
-        $request['kode_product'] = 'P-'. tambah_nol_didepan((int)$product->id_product+1, 6);
+        $request['kode_product'] = 'P-' . tambah_nol_didepan((int)$product->id_product + 1, 6);
         $product = Product::create($request->all());
         return response()->json('data berhasil disimpan', 200);
-
     }
 
     /**
@@ -82,7 +81,7 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
 
-        return response()->json($product,200);
+        return response()->json($product, 200);
     }
 
     /**
@@ -113,7 +112,6 @@ class ProductController extends Controller
         $product->update();
 
         return response()->json('data berhasil disimpan', 200);
-
     }
 
     /**
@@ -129,5 +127,4 @@ class ProductController extends Controller
 
         return response(null, 204);
     }
-
 }

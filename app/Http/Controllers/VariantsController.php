@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class VariantsController extends Controller
 {
-   
+
     public function index()
     {
         return view('variants.index');
@@ -19,18 +19,18 @@ class VariantsController extends Controller
         $variants = Variants::orderby('id_variants', 'asc')->get();
 
         return datatables()
-                ->of($variants)
-                ->addIndexColumn()
-                ->addColumn('aksi', function($variants){
-                    return 
+            ->of($variants)
+            ->addIndexColumn()
+            ->addColumn('aksi', function ($variants) {
+                return
                     '<div class="btn-group">
-                        <button onclick="editForm(`'. route('variants.update', $variants->id_variants).'`)" class="btn btn-primary"><i class="fas fa-edit"></i>Edit</button>
+                        <button onclick="editForm(`' . route('variants.update', $variants->id_variants) . '`)" class="btn btn-primary"><i class="fas fa-edit"></i>Edit</button>
 
-                        <button onclick="deleteForm(`'. route('variants.destroy',  $variants->id_variants).'`)"class="btn btn-danger"><i class="fas fa-trash"></i>Hapus</button>
+                        <button onclick="deleteForm(`' . route('variants.destroy',  $variants->id_variants) . '`)"class="btn btn-danger"><i class="fas fa-trash"></i>Hapus</button>
                     </div>';
-                })
-                ->rawColumns(['aksi'])
-                ->make(true);
+            })
+            ->rawColumns(['aksi'])
+            ->make(true);
     }
 
     public function store(Request $request)
@@ -44,14 +44,13 @@ class VariantsController extends Controller
         $variants->save();
 
         return response()->json('data berhasil disimpan', 200);
-
     }
 
     public function show($id)
     {
         $variants = Variants::find($id);
 
-        return response()->json($variants,200);
+        return response()->json($variants, 200);
     }
 
 
@@ -66,10 +65,9 @@ class VariantsController extends Controller
         $variants->update();
 
         return response()->json('data berhasil disimpan', 200);
-
     }
 
- 
+
     public function destroy(Request $request, $id)
     {
         $variants =  Variants::find($id);
