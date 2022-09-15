@@ -13,6 +13,11 @@ API ini dibuat menggunakan: <br>
 - Validator.min.js  (Form Validation)
 - doctrine/dbal
 
+### Penggunaan
+- Buat Categories
+- Buat Variants
+- Buat Product (pilih categories dan variants)
+- Buat Product Images 
 
 ### Fitur
 - Categories
