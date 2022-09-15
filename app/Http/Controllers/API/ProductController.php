@@ -19,7 +19,7 @@ class ProductController extends Controller
     {
         $product = Product::all();
 
-        if ($product) {
+        if (!empty($product)) {
             return response([
                 'success' => true,
                 'message' => 'Success',
@@ -68,9 +68,9 @@ class ProductController extends Controller
             ->leftjoin('variants', 'variants.id_variants', '=', 'product.id_variants')
             ->orderBy('id_imgs', 'desc')
             ->where('product.id_product', $id)
-            ->get();
+            ->get()->toArray();
 
-        if ($product) {
+        if (!empty($product)) {
             return response([
                 'success' => true,
                 'message' => 'Success',
@@ -79,7 +79,7 @@ class ProductController extends Controller
         } else {
             return response([
                 'success' => false,
-                'message' => 'Failed',
+                'message' => 'Data tidak ditemukan',
             ], 400);
         }
     }
