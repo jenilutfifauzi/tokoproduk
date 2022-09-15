@@ -7,6 +7,13 @@ Pastikan sudah terinstall Composer pada laptop/pc kalian, karena project ini men
 API ini dibuat menggunakan: <br>
 <b>Laravel</b>
 
+### Package yang dipakai
+- Datatable serverside yajra
+- JQuery
+- Validator.min.js  (Form Validation)
+- doctrine/dbal
+
+
 ### Fitur
 - Categories
 - Variants
