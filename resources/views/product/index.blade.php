@@ -93,7 +93,6 @@
                                 $('#modal-form').hide();
                                 table.ajax.reload();
                                 location.reload(true);
-                                console.log(response);
 
                             })
                             .fail((errors) => {

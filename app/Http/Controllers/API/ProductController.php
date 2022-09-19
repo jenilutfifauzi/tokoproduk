@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Providers\ResponseMacroServiceProvider;
+use App\Providers\Response;
 
 class ProductController extends Controller
 {
@@ -18,18 +20,11 @@ class ProductController extends Controller
     public function index()
     {
         $product = Product::all();
-        
+
         if (!empty($product)) {
-            return response([
-                'success' => true,
-                'message' => 'Success',
-                'data' => $product
-            ], 200);
+            return response()->success($product);
         } else {
-            return response([
-                'success' => false,
-                'message' => 'Failed',
-            ], 400);
+            return response()->error();
         }
     }
 
@@ -71,16 +66,9 @@ class ProductController extends Controller
             ->get()->toArray();
 
         if (!empty($product)) {
-            return response([
-                'success' => true,
-                'message' => 'Success',
-                'data' => $product
-            ], 200);
+            return response()->success($product);
         } else {
-            return response([
-                'success' => false,
-                'message' => 'Data tidak ditemukan',
-            ], 400);
+            return response()->error();
         }
     }
 

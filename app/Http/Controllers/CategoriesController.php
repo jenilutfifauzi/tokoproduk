@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoriesRequest;
 use App\Models\categories;
 use App\Http\Requests\StorecategoriesRequest;
 use App\Http\Requests\UpdatecategoriesRequest;
@@ -56,7 +57,6 @@ class CategoriesController extends Controller
         $request->validate([
             'nama_categories' => 'required|unique:product_categories'
         ]);
-
         $categories = new Categories();
         $categories->nama_categories = $request->nama_categories;
         $categories->save();
