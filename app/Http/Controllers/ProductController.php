@@ -63,7 +63,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_product' => 'required|unique:product'
+            'nama_product' => 'required|'
         ]);
         $product = Product::latest()->first() ?? new Product();
         $request['kode_product'] = 'P-' . tambah_nol_didepan((int)$product->id_product + 1, 6);
@@ -105,10 +105,13 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama_product' => 'required|unique:product'
+            'nama_product' => 'required|'
         ]);
         $product =  Product::find($id);
         $product->nama_product = $request->nama_product;
+        $product->id_categories = $request->id_categories;
+        $product->id_variants = $request->id_variants;
+        $product->harga_product = $request->harga_product;
         $product->update();
 
         return response()->json('data berhasil disimpan', 200);

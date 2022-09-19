@@ -18,7 +18,7 @@ class ProductController extends Controller
     public function index()
     {
         $product = Product::all();
-
+        
         if (!empty($product)) {
             return response([
                 'success' => true,
