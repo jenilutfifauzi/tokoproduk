@@ -19,7 +19,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Product::all();
+        $product = Product::with('categories')->with('variants')->get();
 
         if (!empty($product)) {
             return response()->success($product);
@@ -57,13 +57,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = DB::table('product')
-            ->leftjoin('product_images', 'product.id_product', '=', 'product_images.id_product')
-            ->leftjoin('product_categories', 'product_categories.id_categories', '=', 'product.id_categories')
-            ->leftjoin('variants', 'variants.id_variants', '=', 'product.id_variants')
-            ->orderBy('id_imgs', 'desc')
-            ->where('product.id_product', $id)
-            ->get()->toArray();
+        $product = Product::with(['categories','variants'])->where('product.id_product', $id)->first();
 
         if (!empty($product)) {
             return response()->success($product);

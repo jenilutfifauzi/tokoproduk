@@ -65,10 +65,10 @@
                             data: 'nama_product'
                         },
                         {
-                            data: 'nama_categories'
+                            data: 'categories.nama_categories'
                         },
                         {
-                            data: 'nama_variants'
+                            data: 'variants.nama_variants'
                         },
                         {
                             data: 'harga_product'

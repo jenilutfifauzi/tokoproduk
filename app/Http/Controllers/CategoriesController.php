@@ -18,7 +18,14 @@ class CategoriesController extends Controller
      */
     public function index()
     {
+      
         return view('categories.index');
+    }
+
+    public function allData()
+    {
+        $categories = ModelsCategories::orderby('id_categories', 'asc')->get();
+        return response()->success($categories);
     }
 
     public function data()
@@ -73,8 +80,11 @@ class CategoriesController extends Controller
     public function show($id)
     {
         $categories = categories::find($id);
-
-        return response()->json($categories, 200);
+        if (!empty($categories)) {
+            return response()->success($categories);
+        } else {
+            return response()->error();
+        }
     }
 
     /**
@@ -106,7 +116,11 @@ class CategoriesController extends Controller
         $categories->nama_categories = $request->nama_categories;
         $categories->update();
 
-        return response()->json('data berhasil disimpan', 200);
+        if (!empty($categories)) {
+            return response()->success($categories);
+        } else {
+            return response()->error();
+        }
     }
 
     /**

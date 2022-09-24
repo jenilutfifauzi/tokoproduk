@@ -18,7 +18,6 @@ class ProductController extends Controller
      */
     public function index()
     {
-
         $categories = Categories::all()->pluck('nama_categories', 'id_categories');
         $variants = Variants::all()->pluck('nama_variants', 'id_variants');
 
@@ -27,12 +26,8 @@ class ProductController extends Controller
 
     public function data()
     {
-        $product = DB::table('product')
-            ->leftjoin('product_categories', 'product_categories.id_categories', '=', 'product.id_categories')
-            ->leftjoin('variants', 'variants.id_variants', '=', 'product.id_variants')
-            ->orderBy('id_product', 'desc')
-            ->get();
-
+        $product = Product::with(['categories','variants'])->get();
+        
         return datatables()
             ->of($product)
             ->addIndexColumn()
@@ -44,7 +39,7 @@ class ProductController extends Controller
                         <button onclick="deleteForm(`' . route('product.destroy',  $product->id_product) . '`)"class="btn btn-danger"><i class="fas fa-trash"></i>Hapus</button>
                     </div>';
             })
-            ->rawColumns(['aksi'])
+            ->rawColumns(['aksi','categories'])
             ->make(true);
     }
 
@@ -79,7 +74,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::find($id);
+        $product = Product::with(['categories','variants'])->where('product.id_product', $id)->first();
 
         return response()->json($product, 200);
     }
